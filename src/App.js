@@ -5,7 +5,6 @@ import api from './api';
 
 function App() {
 	const initialState = api.users.fetchAll();
-	initialState.map(elem => elem.bookmarkStatus = false);
 	const [users, setUsers] = useState(initialState);
 
 	const handleDeleteUser = (id) => {
@@ -16,18 +15,22 @@ function App() {
 		setUsers(prevState => 
 			prevState.map(elem => {
 				if(elem._id === id) {
-					elem.bookmarkStatus = !elem.bookmarkStatus;
+					elem.bookmark = !elem.bookmark;
 				}
 				return elem;
-			})
-		);
-	}
-
-
+			}))
+	};
+	
 	return (
 		<>
 			{searchStatus(users.length)}
-			{users.length ? <Users users={users} handleDeleteUser={handleDeleteUser} handleUserBookmarkStatus={handleUserBookmarkStatus}/>: ""}
+			{users.length ? 
+				<Users 
+					users={users}
+					handleDeleteUser={handleDeleteUser} 
+					handleUserBookmarkStatus={handleUserBookmarkStatus}
+				/>: ""
+			}
 		</> 
 	)
 };

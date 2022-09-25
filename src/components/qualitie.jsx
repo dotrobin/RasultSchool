@@ -8,7 +8,7 @@ const getBageClasses = (colorName) => {
 
 const Quality = (props) => {
   return (
-    <span className={getBageClasses(props.color)} key={props.key}> {props.name} </span>
+    <span className={getBageClasses(props.color)} key={props.color+props.name}> {props.name} </span>
   );
 };
 

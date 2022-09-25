@@ -8,7 +8,7 @@ const Users = (props) => {
 
 	return (
 		<>
-			<table className="table table-sm table-striped table-hover">
+			<table className="table table-sm table-striped table-hover" key="table1">
 				<thead className="table-dark">
 					<tr>
 						<th scope="col">Имя</th>
@@ -23,7 +23,7 @@ const Users = (props) => {
 				<tbody>
 					{users.map((user, key) => {
 						return (
-							<User {...user} key={key} handleDeleteUser={props.handleDeleteUser} handleUserBookmarkStatus={props.handleUserBookmarkStatus}/>
+							<User {...user} handleDeleteUser={props.handleDeleteUser} handleUserBookmarkStatus={props.handleUserBookmarkStatus} key={key}/>
 						)
 					})}
 				</tbody>
