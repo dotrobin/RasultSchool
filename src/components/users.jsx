@@ -2,9 +2,7 @@ import React from "react";
 import User from './user';
 
 
-const Users = (props) => {
-
-	const users = props.users;
+const Users = ({users, handleDeleteUser, handleUserBookmarkStatus}) => {
 
 	return (
 		<>
@@ -23,7 +21,7 @@ const Users = (props) => {
 				<tbody>
 					{users.map((user, key) => {
 						return (
-							<User {...user} handleDeleteUser={props.handleDeleteUser} handleUserBookmarkStatus={props.handleUserBookmarkStatus} key={key}/>
+							<User {...user} handleDeleteUser={handleDeleteUser} handleUserBookmarkStatus={handleUserBookmarkStatus} key={key}/>
 						)
 					})}
 				</tbody>

@@ -6,9 +6,9 @@ const getBageClasses = (colorName) => {
   return classes;
 };
 
-const Quality = (props) => {
+const Quality = ({color, name}) => {
   return (
-    <span className={getBageClasses(props.color)} key={props.color+props.name}> {props.name} </span>
+    <span className={getBageClasses(color)}>{name} </span>
   );
 };
 
