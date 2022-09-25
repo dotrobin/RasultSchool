@@ -1,6 +1,7 @@
 import React from "react";
 import User from './user';
 
+
 const Users = (props) => {
 
 	const users = props.users;
@@ -15,13 +16,14 @@ const Users = (props) => {
 						<th scope="col">Профессия</th>
 						<th scope="col">Встретился раз</th>
 						<th scope="col">Оценка</th>
+						<th scope="col">Избранное</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
 					{users.map((user, key) => {
 						return (
-							<User {...user} key={key} handleDeleteUser={props.handleDeleteUser} />
+							<User {...user} key={key} handleDeleteUser={props.handleDeleteUser} handleUserBookmarkStatus={props.handleUserBookmarkStatus}/>
 						)
 					})}
 				</tbody>
