@@ -1,7 +1,7 @@
 import React from "react";
 
 
-let mainBadget = (num) => {
+let searchStatus = (num) => {
     let result;
     if (num) {
         let suffix = [2, 3, 4].includes(num%10) ? 'a' : ''
@@ -12,4 +12,4 @@ let mainBadget = (num) => {
     return result;
 }
 
-export default mainBadget;
+export default searchStatus;
