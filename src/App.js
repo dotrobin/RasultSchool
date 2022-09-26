@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Users from "./components/users";
-import searchStatus from "./components/searchStatus";
+import SearchStatus from "./components/searchStatus";
 import api from './api';
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
 	
 	return (
 		<>
-			{searchStatus(users.length)}
+			<SearchStatus count={users.length} />
 			{users.length ? 
 				<Users 
 					users={users}
