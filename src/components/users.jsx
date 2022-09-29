@@ -1,9 +1,19 @@
 import React from "react";
 import User from './user';
-
+import Pagination from "./pagination";
+import { useState } from "react";
+import { paginate } from "../utils/paginate";
 
 const Users = ({users, handleDeleteUser, handleUserBookmarkStatus}) => {
+	const count = users.length;
+	const pageSize = 4;
 
+	const [currentPage, setCurrentPage] = useState(1)
+	const handlePageGhange = (pageIndex) => {
+		setCurrentPage(pageIndex);
+	}
+
+	const usersCrop = paginate(users, currentPage, pageSize);
 	return (
 		<>
 			<table className="table table-sm table-striped table-hover" key="table1">
@@ -19,13 +29,19 @@ const Users = ({users, handleDeleteUser, handleUserBookmarkStatus}) => {
 					</tr>
 				</thead>
 				<tbody>
-					{users.map((user, key) => {
+					{usersCrop.map((user, key) => {
 						return (
 							<User {...user} handleDeleteUser={handleDeleteUser} handleUserBookmarkStatus={handleUserBookmarkStatus} key={key}/>
 						)
 					})}
 				</tbody>
 			</table>
+			<Pagination 
+				itemsCount={count}
+				pageSize={pageSize}
+				currentPage={currentPage}
+				onPageChange={handlePageGhange}
+			/>
 		</>
 	);
 };
