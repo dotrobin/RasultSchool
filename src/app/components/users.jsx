@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import User from "./user";
 import Pagination from "./pagination";
 import { paginate } from "../utils/paginate";
+import api from "../api";
 
 const Users = ({ users, handleDeleteUser, handleUserBookmarkStatus }) => {
 	const count = users.length;
 	const pageSize = 4;
-
+	const [professions, setProfessions] = useState(api.professions.fetchAll());
 	const [currentPage, setCurrentPage] = useState(1);
 	const handlePageGhange = (pageIndex) => {
 		setCurrentPage(pageIndex);

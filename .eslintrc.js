@@ -13,8 +13,11 @@ module.exports = {
   rules: {
     indent: ["error", "tab"],
     semi: [2, "always"],
-    "space-before-function-paren": ["error", "never"],
-    "no-tabs": 0,
+    "space-before-function-paren": [
+      "error", 
+      {anonymous: "always", named: "never"}
+    ],
+    "no-tabs": ["error", { allowIndentationTabs: true }],
     quotes: ["error", "double", { allowTemplateLiterals: true }],
   },
 };
