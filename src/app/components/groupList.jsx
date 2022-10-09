@@ -13,7 +13,7 @@ const GroupList = ({ items, onItemSelect }) => {
 };
 
 GroupList.propTypes = {
-	items: PropTypes.object.isRequired,
+	items: PropTypes.arrayOf(PropTypes.object).isRequired,
 	onItemSelect: PropTypes.func.isRequired
 };
 
