@@ -12,13 +12,14 @@ const Users = ({ users, handleDeleteUser, handleUserBookmarkStatus }) => {
 
 	const [currentPage, setCurrentPage] = useState(1);
 	const [professions, setProfessions] = useState();
+	const [selectedProf, setSelectedProf] = useState();
 
 	useEffect(() => {
 		api.professions.fetchAll().then((data) => setProfessions(data));
 	}, []);
 
-	const handleProfessianSelect = (params) => {
-		console.log(params);
+	const handleProfessianSelect = (item) => {
+		setSelectedProf(item);
 	};
 
 	const handlePageGhange = (pageIndex) => {
@@ -31,6 +32,7 @@ const Users = ({ users, handleDeleteUser, handleUserBookmarkStatus }) => {
 			{professions && (
 				<GroupList
 					items={professions}
+					selectedItem={selectedProf}
 					onItemSelect={handleProfessianSelect}
 				/>
 			)}
