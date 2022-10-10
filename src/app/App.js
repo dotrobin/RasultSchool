@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Users from "./components/users";
-import SearchStatus from "./components/searchStatus";
 import api from "./api";
 
 function App() {
@@ -26,18 +25,11 @@ function App() {
 
 	return (
 		<>
-			<SearchStatus count={users.length} />
-			{users.length
-				? (
-					<Users
-						users={users}
-						handleDeleteUser={handleDeleteUser}
-						handleUserBookmarkStatus={handleUserBookmarkStatus}
-					/>
-				)
-				: (
-					""
-				)}
+			<Users
+				users={users}
+				handleDeleteUser={handleDeleteUser}
+				handleUserBookmarkStatus={handleUserBookmarkStatus}
+			/>
 		</>
 	);
 }
