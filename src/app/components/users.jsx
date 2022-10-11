@@ -38,13 +38,8 @@ const Users = ({ users: allUsers, ...rest }) => {
 	const clearFilter = () => {
 		setSelectedProf();
 	};
-
 	const handleSort = (item) => {
-		if (sortBy.iter === item) {
-			setSortBy((prevState) => ({ ...prevState, order: prevState.order === "asc" ? "desc" : "asc" }));
-		} else {
-			setSortBy({ iter: item, order: "asc" });
-		}
+		setSortBy(item);
 	};
 
 	const filteredUsers = selectedProf ? allUsers.filter((user) => _.isEqual(user.profession, selectedProf)) : allUsers;
@@ -73,7 +68,11 @@ const Users = ({ users: allUsers, ...rest }) => {
 			<div className="d-flex flex-column">
 				<SearchStatus count={count} />
 				{count > 0 && (
-					<UserTable users={usersCrop} onSort={handleSort} {...rest} />
+					<UserTable
+						users={usersCrop}
+						onSort={handleSort}
+						currentSort={sortBy}
+						{...rest} />
 				)}
 				<div className="d-flex justify-content-center">
 					<Pagination
