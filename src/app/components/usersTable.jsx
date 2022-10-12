@@ -1,23 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
-import User from "./user";
+// import User from "./user";
 import TableHeader from "./tanbleHeader";
+import TableBody from "./tanbleBody";
+import Bookmark from "./bookmark";
 
-const UserTable = ({ users, onSort, selectedSort, ...rest }) => {
+const UserTable = ({ users, onSort, selectedSort, onToggleBookmark, ...rest }) => {
 	const columns = {
-		name: { iter: "name", name: "Имя" },
+		name: { path: "name", name: "Имя" },
 		qualities: { name: "Качества" },
-		professions: { iter: "professions.name", name: "Профессия" },
-		complitedMeetings: { iter: "completedMeetings", name: "Встретился раз" },
-		rate: { iter: "rate", name: "Оценка" },
-		bookmark: { iter: "bookmark", name: "Избранное" },
-		delete: {}
+		professions: { path: "profession.name", name: "Профессия" },
+		complitedMeetings: { path: "completedMeetings", name: "Встретился раз" },
+		rate: { path: "rate", name: "Оценка" },
+		bookmark: { path: "bookmark",
+			name: "Избранное",
+			component:
+				<Bookmark
+					status={bookmark}
+					onClick={() => onToggleBookmark(_id)}
+				/>
+		},
+		delete: { component: "delete" }
 	};
 	return (
 		<>
 			<table className="table table-sm table-striped table-hover">
 				<TableHeader {...{ onSort, selectedSort, columns }}/>
-				<tbody>
+				<TableBody {...{ data: users, columns }}/>
+
+				{/* <tbody>
 					{users.map((user, key) => {
 						return (
 							<User
@@ -27,7 +38,7 @@ const UserTable = ({ users, onSort, selectedSort, ...rest }) => {
 							/>
 						);
 					})}
-				</tbody>
+				</tbody> */}
 			</table>
 		</>
 	);
@@ -36,7 +47,8 @@ const UserTable = ({ users, onSort, selectedSort, ...rest }) => {
 UserTable.propTypes = {
 	users: PropTypes.array.isRequired,
 	onSort: PropTypes.func.isRequired,
-	selectedSort: PropTypes.object.isRequired
+	selectedSort: PropTypes.object.isRequired,
+	onToggleBookmark: PropTypes.func.isRequired
 };
 
 export default UserTable;
