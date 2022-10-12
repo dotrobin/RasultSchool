@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Bookmark = ({ status, id, handleUserBookmarkStatus }) => {
+const Bookmark = ({ status, id }) => {
 	const balloonTrue = (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ const Bookmark = ({ status, id, handleUserBookmarkStatus }) => {
 		<button
 			type="button"
 			className="btn btn-outline-danger"
-			onClick={() => handleUserBookmarkStatus(id)}
+			// onClick={() => handleUserBookmarkStatus(id)}
 		>
 			{status ? balloonTrue : ballonFalse}
 		</button>
@@ -46,8 +46,8 @@ const Bookmark = ({ status, id, handleUserBookmarkStatus }) => {
 
 Bookmark.propTypes = {
 	status: PropTypes.bool.isRequired,
-	id: PropTypes.string.isRequired,
-	handleUserBookmarkStatus: PropTypes.func.isRequired
+	id: PropTypes.string.isRequired
+	// handleUserBookmarkStatus: PropTypes.func.isRequired
 };
 
 export default Bookmark;

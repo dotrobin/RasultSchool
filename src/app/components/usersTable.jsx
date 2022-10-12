@@ -12,13 +12,13 @@ const UserTable = ({ users, onSort, selectedSort, onToggleBookmark, ...rest }) =
 		professions: { path: "profession.name", name: "Профессия" },
 		complitedMeetings: { path: "completedMeetings", name: "Встретился раз" },
 		rate: { path: "rate", name: "Оценка" },
-		bookmark: { path: "bookmark",
+		bookmark: {
+			path: "bookmark",
 			name: "Избранное",
-			component:
+			component: (user) => (
 				<Bookmark
-					status={bookmark}
-					onClick={() => onToggleBookmark(_id)}
-				/>
+					status={user.bookmark}
+					onClick={ () => onToggleBookmark(user._id) } />)
 		},
 		delete: { component: "delete" }
 	};
@@ -27,18 +27,6 @@ const UserTable = ({ users, onSort, selectedSort, onToggleBookmark, ...rest }) =
 			<table className="table table-sm table-striped table-hover">
 				<TableHeader {...{ onSort, selectedSort, columns }}/>
 				<TableBody {...{ data: users, columns }}/>
-
-				{/* <tbody>
-					{users.map((user, key) => {
-						return (
-							<User
-								{...user}
-								{...rest}
-								key={key}
-							/>
-						);
-					})}
-				</tbody> */}
 			</table>
 		</>
 	);

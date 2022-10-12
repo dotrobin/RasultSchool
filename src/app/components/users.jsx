@@ -8,7 +8,7 @@ import api from "../api";
 import GroupList from "./groupList";
 import _ from "lodash";
 
-const Users = ({ users: allUsers, ...rest }) => {
+const Users = ({ users: allUsers, handleUserBookmarkStatus, ...rest }) => {
 	const pageSize = 4;
 	const [currentPage, setCurrentPage] = useState(1);
 	const [professions, setProfessions] = useState();
@@ -72,6 +72,7 @@ const Users = ({ users: allUsers, ...rest }) => {
 						users={usersCrop}
 						onSort={handleSort}
 						selectedSort={sortBy}
+						onToggleBookmark={handleUserBookmarkStatus}
 						{...rest} />
 				)}
 				<div className="d-flex justify-content-center">
