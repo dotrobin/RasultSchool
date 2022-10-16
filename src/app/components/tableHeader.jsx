@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import FilterIcon from "./filterIcon";
 
 const TableHeader = ({ onSort, selectedSort, columns }) => {
 	const handleSort = (item) => {
@@ -24,6 +25,10 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
 						{...{ role: columns[column].path && "button" }}
 						scope="col">
 						{columns[column].name}
+						{ (columns[column].path === selectedSort.path)
+							? <FilterIcon status={selectedSort.order === "asc"} />
+							: ""
+						}
 					</th>
 				))}
 			</tr>

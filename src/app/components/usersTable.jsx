@@ -17,6 +17,7 @@ const UserTable = ({
 	const columns = {
 		name: { path: "name", name: "Имя" },
 		qualities: {
+			path: "qualities",
 			name: "Качества",
 			component: (user) => (
 				<QualitiesList
@@ -36,6 +37,7 @@ const UserTable = ({
 				/>)
 		},
 		delete: {
+			path: "delete",
 			component: (user) => (
 				<button
 					type="button"
