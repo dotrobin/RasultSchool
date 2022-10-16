@@ -8,12 +8,32 @@ import api from "../api";
 import GroupList from "./groupList";
 import _ from "lodash";
 
-const Users = ({ users: allUsers, handleUserBookmarkStatus, onDelete, ...rest }) => {
+const Users = () => {
 	const pageSize = 8;
 	const [currentPage, setCurrentPage] = useState(1);
 	const [professions, setProfessions] = useState();
 	const [selectedProf, setSelectedProf] = useState();
 	const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
+
+	const [users, setUsers] = useState([]);
+	useEffect(() => {
+		api.users.fetchAll().then((data) => setUsers(data));
+	}, []);
+
+	const handleDeleteUser = (id) => {
+		setUsers(users.filter((user) => user._id !== id));
+	};
+
+	const handleUserBookmarkStatus = (id) => {
+		setUsers((prevState) =>
+			prevState.map((elem) => {
+				if (elem._id === id) {
+					elem.bookmark = !elem.bookmark;
+				}
+				return elem;
+			})
+		);
+	};
 
 	useEffect(() => {
 		api.professions.fetchAll().then((data) => setProfessions(data));
@@ -42,7 +62,7 @@ const Users = ({ users: allUsers, handleUserBookmarkStatus, onDelete, ...rest })
 		setSortBy(item);
 	};
 
-	const filteredUsers = selectedProf ? allUsers.filter((user) => _.isEqual(user.profession, selectedProf)) : allUsers;
+	const filteredUsers = selectedProf ? users.filter((user) => _.isEqual(user.profession, selectedProf)) : users;
 	const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
 	const usersCrop = paginate(sortedUsers, currentPage, pageSize);
 	const count = filteredUsers.length;
@@ -73,8 +93,8 @@ const Users = ({ users: allUsers, handleUserBookmarkStatus, onDelete, ...rest })
 						onSort={handleSort}
 						selectedSort={sortBy}
 						onToggleBookmark={handleUserBookmarkStatus}
-						onDelete={onDelete}
-						{...rest} />
+						onDelete={handleDeleteUser}
+					/>
 				)}
 				<div className="d-flex justify-content-center">
 					<Pagination
