@@ -8,8 +8,8 @@ import api from "../api";
 import GroupList from "./groupList";
 import _ from "lodash";
 
-const Users = ({ users: allUsers, handleUserBookmarkStatus, ...rest }) => {
-	const pageSize = 4;
+const Users = ({ users: allUsers, handleUserBookmarkStatus, onDelete, ...rest }) => {
+	const pageSize = 8;
 	const [currentPage, setCurrentPage] = useState(1);
 	const [professions, setProfessions] = useState();
 	const [selectedProf, setSelectedProf] = useState();
@@ -43,7 +43,7 @@ const Users = ({ users: allUsers, handleUserBookmarkStatus, ...rest }) => {
 	};
 
 	const filteredUsers = selectedProf ? allUsers.filter((user) => _.isEqual(user.profession, selectedProf)) : allUsers;
-	const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+	const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
 	const usersCrop = paginate(sortedUsers, currentPage, pageSize);
 	const count = filteredUsers.length;
 
@@ -73,6 +73,7 @@ const Users = ({ users: allUsers, handleUserBookmarkStatus, ...rest }) => {
 						onSort={handleSort}
 						selectedSort={sortBy}
 						onToggleBookmark={handleUserBookmarkStatus}
+						onDelete={onDelete}
 						{...rest} />
 				)}
 				<div className="d-flex justify-content-center">
@@ -90,7 +91,7 @@ const Users = ({ users: allUsers, handleUserBookmarkStatus, ...rest }) => {
 
 Users.propTypes = {
 	users: PropTypes.arrayOf(PropTypes.object),
-	handleDeleteUser: PropTypes.func.isRequired,
+	onDelete: PropTypes.func.isRequired,
 	handleUserBookmarkStatus: PropTypes.func.isRequired
 };
 

@@ -27,11 +27,11 @@ function App() {
 		<>
 			<Users
 				users={users}
-				handleDeleteUser={handleDeleteUser}
+				onDelete={handleDeleteUser}
 				handleUserBookmarkStatus={handleUserBookmarkStatus}
 			/>
 		</>
 	);
-}
+};
 
 export default App;
