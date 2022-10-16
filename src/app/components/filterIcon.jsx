@@ -5,8 +5,8 @@ const FilterIcon = ({ status }) => {
 	const arrowDown = (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
+			width="16"
+			height="16"
 			fill="currentColor"
 			className="bi bi-arrow-down-circle"
 			viewBox="0 0 16 16"
@@ -20,8 +20,8 @@ const FilterIcon = ({ status }) => {
 	const arrowUp = (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
+			width="16"
+			height="16"
 			fill="currentColor"
 			className="bi bi-arrow-up-circle"
 			viewBox="0 0 16 16"
