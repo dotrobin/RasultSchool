@@ -35,7 +35,6 @@ const Bookmark = ({ status }) => {
 
 	return (
 		<button
-			type="button"
 			className="btn btn-outline-danger"
 		>
 			{status ? balloonTrue : ballonFalse}
