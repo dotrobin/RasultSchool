@@ -1,9 +1,22 @@
 import React from "react";
-import Users from "./components/users";
+import { Switch, Route, Redirect } from "react-router-dom";
+
+import Main from "./components/main";
+import Login from "./components/login";
+import NavBar from "./components/navBar";
+import UsersInfo from "./components/usersInfo";
 
 function App() {
 	return (
-		<Users />
+		<div>
+			<NavBar />
+			<Switch>
+				<Route path="/login" component={Login} />
+				<Route path="/users/:userId?" component={UsersInfo} />
+				<Route path="/" exact component={Main} />
+				<Redirect to="/" />
+			</Switch>
+		</div>
 	);
 };
 

@@ -35,7 +35,6 @@ const Bookmark = ({ status, onToggleBookmark }) => {
 
 	return (
 		<button
-			type="button"
 			className="btn btn-outline-danger"
 			onClick={() => onToggleBookmark()}
 		>

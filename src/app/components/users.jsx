@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import UserTable from "./usersTable";
 import Pagination from "./pagination";
 import SearchStatus from "./searchStatus";
@@ -107,12 +106,6 @@ const Users = () => {
 			</div>
 		</div>
 	);
-};
-
-Users.propTypes = {
-	users: PropTypes.arrayOf(PropTypes.object),
-	onDelete: PropTypes.func.isRequired,
-	handleUserBookmarkStatus: PropTypes.func.isRequired
 };
 
 export default Users;
