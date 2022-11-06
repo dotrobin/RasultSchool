@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import { Link } from "react-router-dom";
-// import TableHeader from "./tableHeader";
-// import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
 import QualitiesList from "./qualitiesList";
 import Table from "./table";

@@ -5,6 +5,7 @@ import SearchStatus from "./searchStatus";
 import { paginate } from "../utils/paginate";
 import api from "../api";
 import GroupList from "./groupList";
+import Filter from "./filter";
 import _ from "lodash";
 
 const Users = () => {
@@ -86,6 +87,7 @@ const Users = () => {
 
 			<div className="d-flex flex-column">
 				<SearchStatus count={count} />
+				<Filter/>
 				{count > 0 && (
 					<UserTable
 						users={usersCrop}
