@@ -4,7 +4,7 @@ import React from "react";
 const Filter = () => {
 	return (
 		<div className="mb-3">
-			<input className="form-control" type="text" placeholder="Default input" aria-label="default input example"></input>
+			<input className="form-control" type="text" placeholder="Search..." aria-label="default input example"></input>
 		</div>
 	);
 };
