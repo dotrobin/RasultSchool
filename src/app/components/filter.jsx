@@ -1,13 +1,26 @@
 import React from "react";
-// import PropTypes from "prop-tpes";
+import PropTypes from "prop-types";
 
-const Filter = () => {
+const Filter = ({ value, onChange }) => {
 	return (
-		<div className="mb-3">
-			<input className="form-control" type="text" placeholder="Search..." aria-label="default input example"></input>
-		</div>
+		<form>
+			<div className="mb-3">
+				<input
+					className="form-control"
+					type="text"
+					placeholder="Search..."
+					id="searchFiled"
+					name="searchFiled"
+					value={value}
+					onChange={onChange}
+				/>
+			</div>
+		</form>
 	);
 };
 
-Filter.propTypes = {};
+Filter.propTypes = {
+	value: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired
+};
 export default Filter;

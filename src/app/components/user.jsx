@@ -10,7 +10,6 @@ const UserInfo = ({ userId }) => {
 	useEffect(() => {
 		api.users.getById(userId).then((data) => setUser(data));
 	}, []);
-	console.log("user:", user);
 	const userRender = () => {
 		return (
 			<>

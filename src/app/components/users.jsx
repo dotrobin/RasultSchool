@@ -12,6 +12,7 @@ const Users = () => {
 	const pageSize = 8;
 	const [currentPage, setCurrentPage] = useState(1);
 	const [professions, setProfessions] = useState();
+	const [filterByName, setFilterByName] = useState();
 	const [selectedProf, setSelectedProf] = useState();
 	const [sortBy, setSortBy] = useState({ path: undefined, order: "asc" });
 
@@ -44,6 +45,7 @@ const Users = () => {
 	}, [selectedProf]);
 
 	const handleProfessionSelect = (item) => {
+		setFilterByName("");
 		if (selectedProf === item) {
 			setSelectedProf();
 		} else {
@@ -62,8 +64,14 @@ const Users = () => {
 		setSortBy(item);
 	};
 
+	const handleSearch = (e) => {
+		clearFilter();
+		setFilterByName(e.target.value);
+	};
+
 	const filteredUsers = selectedProf ? users.filter((user) => _.isEqual(user.profession, selectedProf)) : users;
-	const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
+	const usersFilteredByName = filterByName ? filteredUsers.filter((user) => (user.name.toLowerCase().includes(filterByName.toLowerCase()))) : filteredUsers;
+	const sortedUsers = _.orderBy(usersFilteredByName, [sortBy.path], [sortBy.order]);
 	const usersCrop = paginate(sortedUsers, currentPage, pageSize);
 	const count = filteredUsers.length;
 
@@ -87,7 +95,7 @@ const Users = () => {
 
 			<div className="d-flex flex-column">
 				<SearchStatus count={count} />
-				<Filter/>
+				<Filter value={filterByName} onChange={handleSearch}/>
 				{count > 0 && (
 					<UserTable
 						users={usersCrop}
