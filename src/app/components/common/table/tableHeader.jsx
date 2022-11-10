@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FilterIcon from "./filterIcon";
+import FilterIcon from "../../filterIcon";
 
 const TableHeader = ({ onSort, selectedSort, columns }) => {
 	const handleSort = (item) => {
