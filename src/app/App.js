@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import Main from "./components/main";
-import Login from "./components/login";
+import Login from "./layouts/login";
 import NavBar from "./components/navBar";
 import UsersInfo from "./components/usersInfo";
 
