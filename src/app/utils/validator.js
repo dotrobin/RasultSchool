@@ -36,10 +36,10 @@ export function validator(data, config) {
 			const error = validate(
 				validateMethod,
 				data[fieldName],
-				config[fieldName]
+				config[fieldName]с
 			);
 			if (error && !errors[fieldName]) {
-				error[fieldName] = error;
+				errors[fieldName] = error;
 			};
 		};
 	};
