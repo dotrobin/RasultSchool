@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
+import api from "../../api";
 
-const LoginForm = () => {
-	const [data, setData] = useState({ email: "", password: "" });
+const RegisterForm = () => {
+	const [data, setData] = useState({ email: "", password: "", profession: "" });
 	const [errors, setErrors] = useState({});
+	const [professions, setProfessions] = useState();
 
 	const validatorConfig = {
 		email: {
@@ -35,6 +37,10 @@ const LoginForm = () => {
 	useEffect(() => {
 		validate();
 	}, [data]);
+
+	useEffect(() => {
+		api.professions.fetchAll().then((data) => setProfessions(data));
+	}, []);
 
 	const validate = () => {
 		const errors = validator(data, validatorConfig);
@@ -75,6 +81,7 @@ const LoginForm = () => {
 				onChange={handleChange}
 				error={errors.password}
 			/>
+
 			<button
 				type="submit"
 				disabled={!isValid}
@@ -86,4 +93,4 @@ const LoginForm = () => {
 	);
 };
 
-export default LoginForm;
+export default RegisterForm;
