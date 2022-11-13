@@ -2,9 +2,16 @@ import React, { useState, useEffect } from "react";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
 import api from "../../api";
+import SelectField from "../common/form/selectField";
+import RadioField from "../common/form/radioField";
 
 const RegisterForm = () => {
-	const [data, setData] = useState({ email: "", password: "", profession: "" });
+	const [data, setData] = useState({
+		email: "",
+		password: "",
+		profession: "",
+		sex: "male"
+	});
 	const [errors, setErrors] = useState({});
 	const [professions, setProfessions] = useState();
 
@@ -30,6 +37,11 @@ const RegisterForm = () => {
 			min: {
 				message: "Пароль должен состоять минимум из 8 символов",
 				value: 8
+			}
+		},
+		profession: {
+			isRequired: {
+				message: "Обязательно выберите Вашу профессию"
 			}
 		}
 	};
@@ -81,7 +93,24 @@ const RegisterForm = () => {
 				onChange={handleChange}
 				error={errors.password}
 			/>
-
+			<SelectField
+				Label="Выберите вашу профессию"
+				defaultOption="Choose..."
+				options={professions}
+				onChange={handleChange}
+				value={data.profession}
+				error={errors.profession}
+			/>
+			<RadioField
+				options={[{ name: "Male", value: "male" },
+					{ name: "FeMale", value: "male" },
+					{ name: "Other", value: "other" }
+				]}
+				name="sex"
+				onChange={handleChange}
+				value={data.sex}
+				label="Выберите свой пол"
+			/>
 			<button
 				type="submit"
 				disabled={!isValid}

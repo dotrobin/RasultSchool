@@ -1,44 +1,56 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-const SelectField = ({ label, value, onChange, defaultOption }) => {
+const SelectField = ({ label, value, onChange, defaultOption, options, error }) => {
+	const optionsArray = !Array.isArray(options) && typeof (options) === "object"
+		? Object.keys(options).map((optionName) => ({ name: options[optionName].name, value: options[optionName]._id }))
+		: options;
+
+	const getInputClasses = () => {
+		return "form-select" + (error ? " is-invalid" : "");
+	};
 
 	return (
-			<div className="mb-4">
-				<label htmlFor="validationCustom04" className="form-label">
-					{label}
-				</label>
-				<select
-					className="form-select"
-					id="validationCustom04"
-					name="profession"
-					value={value}
-					onChange={handleChange}
-				>
-					<option selected={data.profession === ""} disabled value="">
-						.{defaultOption}
+		<div className="mb-4">
+			<label htmlFor="validationCustom04" className="form-label">
+				{label}
+			</label>
+			<select
+				defaultValue={defaultOption}
+				className={getInputClasses()}
+				id="validationCustom04"
+				name="profession"
+				value={value}
+				onChange={onChange}
+			>
+				<option selected={value === ""} disabled value="">
+					{defaultOption}
+				</option>
+				{optionsArray && optionsArray.map(option => (
+					<option
+						value={option.value}
+						key={option.value}
+					>
+						{option.name}
 					</option>
-					{professions && Object.keys(professions).map(professionName => (
-						<option
-							value={professions[professionName]._id}
-							key={professions[professionName]._id}
-						>
-							{professions[professionName].name}
-						</option>))}
-				</select>
+				))}
+			</select>
+			{error && (
 				<div className="invalid-feedback">
-					Please select a valid state
+					{error}
 				</div>
-			</div>
+			)}
+		</div>
 	);
 };
 
-SelectField.defaultProps = {
-	type: "text"
-};
-
 SelectField.propTypes = {
-
+	label: PropTypes.string,
+	value: PropTypes.string,
+	onChange: PropTypes.func,
+	defaultOption: PropTypes.string,
+	error: PropTypes.string,
+	options: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };
 
 export default SelectField;
