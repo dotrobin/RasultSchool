@@ -6,7 +6,7 @@ import Bookmark from "../common/bookmark";
 import Qualities from "./qualities";
 import Table from "../common/table";
 
-const UserTable = ({
+const UsersTable = ({
 	users,
 	onSort,
 	selectedSort,
@@ -19,11 +19,10 @@ const UserTable = ({
 			path: "name",
 			name: "Имя",
 			component: (user) => (
-				<a><Link to={"/users/" + user._id}>{user.name}</Link></a>
+				<Link to={"/users/" + user._id}>{user.name}</Link>
 			)
 		},
 		qualities: {
-			path: "qualities",
 			name: "Качества",
 			component: (user) => (
 				<Qualities
@@ -34,16 +33,14 @@ const UserTable = ({
 		complitedMeetings: { path: "completedMeetings", name: "Встретился раз" },
 		rate: { path: "rate", name: "Оценка" },
 		bookmark: {
-			path: "bookmark",
 			name: "Избранное",
 			component: (user) => (
 				<Bookmark
-					status={ user.bookmark }
-					onClick={ () => onToggleBookmark(user._id) }
+					status={user.bookmark}
+					onClick={() => onToggleBookmark(user._id)}
 				/>)
 		},
 		delete: {
-			path: "delete",
 			component: (user) => (
 				<button
 					type="button"
@@ -65,7 +62,7 @@ const UserTable = ({
 	);
 };
 
-UserTable.propTypes = {
+UsersTable.propTypes = {
 	users: PropTypes.array.isRequired,
 	onSort: PropTypes.func.isRequired,
 	selectedSort: PropTypes.object.isRequired,
@@ -73,4 +70,4 @@ UserTable.propTypes = {
 	onDelete: PropTypes.func.isRequired
 };
 
-export default UserTable;
+export default UsersTable;

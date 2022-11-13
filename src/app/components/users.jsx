@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import UserTable from "./ui/usersTable";
+import UsersTable from "./ui/usersTable";
 import Pagination from "./common/pagination";
 import SearchStatus from "./ui/searchStatus";
 import { paginate } from "../utils/paginate";
@@ -97,12 +97,12 @@ const Users = () => {
 				<SearchStatus count={count} />
 				<Filter value={filterByName} onChange={handleSearch}/>
 				{count > 0 && (
-					<UserTable
+					<UsersTable
 						users={usersCrop}
 						onSort={handleSort}
 						selectedSort={sortBy}
-						onToggleBookmark={handleUserBookmarkStatus}
 						onDelete={handleDeleteUser}
+						onToggleBookmark={handleUserBookmarkStatus}
 					/>
 				)}
 				<div className="d-flex justify-content-center">
