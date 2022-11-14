@@ -166,7 +166,6 @@ const users = [
 		bookmark: false
 	}
 ];
-
 if (!localStorage.getItem("users")) {
 	localStorage.setItem("users", JSON.stringify(users));
 }
@@ -177,7 +176,6 @@ const fetchAll = () =>
 			resolve(JSON.parse(localStorage.getItem("users")));
 		}, 2000);
 	});
-
 const update = (id, data) =>
 	new Promise((resolve) => {
 		const users = JSON.parse(localStorage.getItem("users"));
