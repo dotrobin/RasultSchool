@@ -75,6 +75,7 @@ const UserEditPage = ({ userId }) => {
 	};
 
 	const handleChange = (target) => {
+		console.log(target);
 		setUser((prevState) => ({
 			...prevState,
 			[target.name]: target.value
@@ -96,16 +97,16 @@ const UserEditPage = ({ userId }) => {
 							/>
 							<SelectField
 								Label="Выберите {профессию"
-								defaultOption={user.profession.name}
+								defaultValue={user.profession.name}
 								options={professions}
 								onChange={handleChange}
-								value={user.profession.name}
+								value={user.profession}
 								error={errors.profession}
 								name="profession"
 							/>
 							<RadioField
 								options={[{ name: "Male", value: "male" },
-									{ name: "FeMale", value: "female" },
+									{ name: "Female", value: "female" },
 									{ name: "Other", value: "other" }
 								]}
 								name="sex"

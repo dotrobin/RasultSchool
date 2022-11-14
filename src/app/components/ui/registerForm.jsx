@@ -106,7 +106,7 @@ const RegisterForm = () => {
 			/>
 			<SelectField
 				Label="Выберите вашу профессию"
-				defaultOption="Choose..."
+				defaultValue="Choose..."
 				options={professions}
 				onChange={handleChange}
 				value={data.profession}
@@ -114,14 +114,15 @@ const RegisterForm = () => {
 				name="profession"
 			/>
 			<RadioField
-				options={[{ name: "Male", value: "male" },
+				options={[
+					{ name: "Male", value: "male" },
 					{ name: "FeMale", value: "female" },
 					{ name: "Other", value: "other" }
 				]}
 				name="sex"
 				onChange={handleChange}
 				value={data.sex}
-				label="Выберите свой пол"
+				label="Выберите ваш пол"
 			/>
 			<MultiSelectField
 				options={qualities}
