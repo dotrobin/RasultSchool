@@ -58,6 +58,10 @@ const UserEditPage = ({ userId }) => {
 		api.qualities.fetchAll().then((data) => setQualities(data));
 	}, []);
 
+	useEffect(() => {
+		console.log("Eff_user:", user);
+	}, [user]);
+
 	const isValid = Object.keys(errors).length === 0;
 
 	const handleSubmit = (e) => {
@@ -75,7 +79,8 @@ const UserEditPage = ({ userId }) => {
 	};
 
 	const handleChange = (target) => {
-		console.log(target);
+		console.log("H:", target);
+
 		setUser((prevState) => ({
 			...prevState,
 			[target.name]: target.value
@@ -95,12 +100,19 @@ const UserEditPage = ({ userId }) => {
 								onChange={handleChange}
 								error={errors.name}
 							/>
+							<TextField
+								label="Email"
+								name="email"
+								value={user.email}
+								onChange={handleChange}
+								error={errors.email}
+							/>
 							<SelectField
 								Label="Выберите {профессию"
 								defaultValue={user.profession.name}
 								options={professions}
 								onChange={handleChange}
-								value={user.profession}
+								value={user.profession.name}
 								error={errors.profession}
 								name="profession"
 							/>

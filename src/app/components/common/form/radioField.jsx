@@ -5,6 +5,7 @@ const RadioField = ({ options, name, onChange, value, label }) => {
 	const handleChange = ({ target }) => {
 		onChange({ name: target.name, value: target.value });
 	};
+
 	return (
 		<div className="mb-4">
 			<label className="form-label">
@@ -21,7 +22,7 @@ const RadioField = ({ options, name, onChange, value, label }) => {
 							type="radio"
 							name={name}
 							id={option.name + "_" + option.value}
-							value={value}
+							value={option.value}
 							onChange={handleChange}
 							checked={option.value === value}
 						/>
