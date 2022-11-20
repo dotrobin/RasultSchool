@@ -78,13 +78,20 @@ const UserEditPage = ({ userId }) => {
 		return Object.keys(errors).length === 0;
 	};
 
-	const handleChange = (target) => {
-		console.log("H:", target);
+	const convertUserQualities = (options) => {
+		return options.map((elem) => ({ label: elem.name, value: elem._id }));
+	};
 
+	const handleChange = (target) => {
 		setUser((prevState) => ({
 			...prevState,
 			[target.name]: target.value
 		}));
+	};
+
+	const handleClick = () => {
+		api.users.update(userId, user);
+		history.push("/users/" + userId);
 	};
 
 	if (user) {
@@ -129,7 +136,7 @@ const UserEditPage = ({ userId }) => {
 							<MultiSelectField
 								options={qualities}
 								onChange={handleChange}
-								defaultValue={user.qualities}
+								defaultValue={convertUserQualities(user.qualities)}
 								name="qualities"
 								label="Выберите ваши качества"
 							/>
@@ -137,8 +144,9 @@ const UserEditPage = ({ userId }) => {
 								type="submit"
 								disabled={!isValid}
 								className="btn btn-primary w-100 mx-auto"
+								onClick={handleClick}
 							>
-								Изменить данные пользователя
+								Обновить
 							</button>
 						</form>
 					</div>
