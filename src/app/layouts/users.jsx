@@ -7,11 +7,11 @@ import UserEditPage from "../components/page/userEditPage";
 
 const Users = () => {
 	const params = useParams();
-	const { userId, status } = params;
+	const { userId, edit } = params;
 	return (
 		<>
 			{userId
-				? status === "edit"
+				? edit
 					? <UserEditPage userId={userId}/>
 					: <UserPage userId={userId}/>
 				: <UsersListPage />

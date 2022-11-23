@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import api from "../../../api";
@@ -9,7 +9,8 @@ import SelectField from "../../common/form/selectField";
 import RadioField from "../../common/form/radioField";
 import MultiSelectField from "../../common/form/multiSelectField";
 
-const UserEditPage = ({ userId }) => {
+const UserEditPage = () => {
+	const { userId } = useParams();
 	const history = useHistory();
 	const [user, setUser] = useState();
 	const [errors, setErrors] = useState({});
