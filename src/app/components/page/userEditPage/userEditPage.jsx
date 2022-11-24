@@ -14,7 +14,7 @@ const UserEditPage = () => {
 	const history = useHistory();
 	const [user, setUser] = useState();
 	const [errors, setErrors] = useState({});
-	const [professions, setProfessions] = useState();
+	const [professions, setProfessions] = useState({});
 	const [qualities, setQualities] = useState([]);
 
 	const validatorConfig = {
