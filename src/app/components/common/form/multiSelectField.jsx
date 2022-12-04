@@ -8,9 +8,6 @@ const MultiSelectField = ({ options, onChange, name, label, defaultValue }) => {
 		: options;
 
 	const handleChange = (value) => {
-		console.log("OP:", options);
-		console.log("Name:", name);
-		console.log("Value:", value);
 		const returnValue = value.map((elem) => {
 			for (const option in options) {
 				if (options[option]._id === elem.value) {
@@ -19,7 +16,6 @@ const MultiSelectField = ({ options, onChange, name, label, defaultValue }) => {
 			};
 			return {};
 		});
-		console.log("returnValue:", returnValue);
 		onChange({ name, value: returnValue });
 	};
 
