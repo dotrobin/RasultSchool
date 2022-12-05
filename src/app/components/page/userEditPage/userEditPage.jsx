@@ -25,6 +25,24 @@ const UserEditPage = () => {
 		qualities: []
 	});
 
+	useEffect(() => {
+		setIsLoading(true);
+		api.users.getById(userId).then(({ profession, qualities, ...data }) =>
+			setData((prevState) => ({
+				...prevState,
+				...data,
+				qualities: transformData(qualities),
+				profession: profession._id
+			}))
+		);
+		api.professions.fetchAll().then((data) => setProfessions(data));
+		api.qualities.fetchAll().then((data) => setQualities(data));
+	}, []);
+
+	useEffect(() => {
+		if (data._id) setIsLoading(false);
+	}, [data]);
+
 	const getProfessionById = (id) => {
 		for (const prof of professions) {
 			if (prof.value === id) {
@@ -88,24 +106,6 @@ const UserEditPage = () => {
 	const transformData = (data) => {
 		return data.map((qual) => ({ label: qual.name, value: qual._id }));
 	};
-
-	useEffect(() => {
-		setIsLoading(true);
-		api.users.getById(userId).then(({ profession, qualities, ...data }) =>
-			setData((prevState) => ({
-				...prevState,
-				...data,
-				qualities: transformData(qualities),
-				profession: profession._id
-			}))
-		);
-		api.professions.fetchAll().then((data) => setProfessions(data));
-		api.qualities.fetchAll().then((data) => setQualities(data));
-	}, []);
-
-	useEffect(() => {
-		if (data._id) setIsLoading(false);
-	}, [data]);
 
 	const isValid = Object.keys(errors).length === 0;
 
