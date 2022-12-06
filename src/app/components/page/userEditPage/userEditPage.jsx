@@ -26,7 +26,10 @@ const UserEditPage = () => {
 	});
 
 	useEffect(() => {
-		setIsLoading(true);
+		console.log("Prof:", professions);
+	}, [professions]);
+
+	useEffect(() => {
 		api.users.getById(userId).then(({ profession, qualities, ...data }) =>
 			setData((prevState) => ({
 				...prevState,
@@ -35,8 +38,15 @@ const UserEditPage = () => {
 				profession: profession._id
 			}))
 		);
-		api.professions.fetchAll().then((data) => setProfessions(data));
+		api.professions.fetchAll().then((data) => {
+			const professionsList = Object.keys(data).map((professionName) => ({
+				label: data[professionName].name,
+				value: data[professionName]._id
+			}));
+			setProfessions(professionsList);
+		});
 		api.qualities.fetchAll().then((data) => setQualities(data));
+		setIsLoading(true);
 	}, []);
 
 	useEffect(() => {
