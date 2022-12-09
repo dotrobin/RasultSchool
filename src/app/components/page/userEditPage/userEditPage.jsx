@@ -45,7 +45,15 @@ const UserEditPage = () => {
 			}));
 			setProfessions(professionsList);
 		});
-		api.qualities.fetchAll().then((data) => setQualities(data));
+		api.qualities.fetchAll().then((data) => {
+			const qualitiesList = Object.keys(data).map((optionName) => ({
+				value: data[optionName]._id,
+				label: data[optionName].name,
+				color: data[optionName].color
+			}));
+			setQualities(qualitiesList);
+		});
+
 		setIsLoading(true);
 	}, []);
 
