@@ -14,7 +14,7 @@ const Users = () => {
 	const [professions, setProfessions] = useState();
 	const [filterByName, setFilterByName] = useState("");
 	const [selectedProf, setSelectedProf] = useState();
-	const [sortBy, setSortBy] = useState({ path: undefined, order: "asc" });
+	const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
 
 	const [users, setUsers] = useState([]);
 	useEffect(() => {
@@ -26,14 +26,13 @@ const Users = () => {
 	};
 
 	const handleUserBookmarkStatus = (id) => {
-		setUsers((prevState) =>
-			prevState.map((elem) => {
-				if (elem._id === id) {
-					elem.bookmark = !elem.bookmark;
-				}
-				return elem;
-			})
-		);
+		const newArray = users.map((user) => {
+			if (user._id === id) {
+				return { ...user, bookmark: !user.bookmark };
+			}
+			return user;
+		});
+		setUsers(newArray);
 	};
 
 	useEffect(() => {
@@ -45,12 +44,8 @@ const Users = () => {
 	}, [selectedProf]);
 
 	const handleProfessionSelect = (item) => {
-		setFilterByName("");
-		if (selectedProf === item) {
-			setSelectedProf();
-		} else {
-			setSelectedProf(item);
-		};
+		if (filterByName !== "") setFilterByName("");
+		setSelectedProf(item);
 	};
 
 	const handlePageGhange = (pageIndex) => {

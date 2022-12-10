@@ -8,14 +8,14 @@ import TextField from "../../common/form/textField";
 import SelectField from "../../common/form/selectField";
 import RadioField from "../../common/form/radioField";
 import MultiSelectField from "../../common/form/multiSelectField";
+import BackHistoryButton from "../../common/backButton";
 
 const UserEditPage = () => {
 	const { userId } = useParams();
 	const history = useHistory();
 	const [isLoading, setIsLoading] = useState(false);
-	const [user, setUser] = useState();
 	const [errors, setErrors] = useState({});
-	const [professions, setProfessions] = useState({});
+	const [professions, setProfessions] = useState([]);
 	const [qualities, setQualities] = useState([]);
 	const [data, setData] = useState({
 		name: "",
@@ -24,10 +24,6 @@ const UserEditPage = () => {
 		sex: "male",
 		qualities: []
 	});
-
-	useEffect(() => {
-		console.log("Prof:", professions);
-	}, [professions]);
 
 	useEffect(() => {
 		api.users.getById(userId).then(({ profession, qualities, ...data }) =>
@@ -45,12 +41,23 @@ const UserEditPage = () => {
 			}));
 			setProfessions(professionsList);
 		});
-		api.qualities.fetchAll().then((data) => setQualities(data));
+		api.qualities.fetchAll().then((data) => {
+			const qualitiesList = Object.keys(data).map((optionName) => ({
+				value: data[optionName]._id,
+				label: data[optionName].name,
+				color: data[optionName].color
+			}));
+			setQualities(qualitiesList);
+		});
 		setIsLoading(true);
 	}, []);
 
 	useEffect(() => {
 		if (data._id) setIsLoading(false);
+	}, [data]);
+
+	useEffect(() => {
+		validate();
 	}, [data]);
 
 	const getProfessionById = (id) => {
@@ -86,29 +93,9 @@ const UserEditPage = () => {
 				message: "Email введен некорректно"
 			}
 		},
-		password: {
+		name: {
 			isRequired: {
-				message: "Пароль не должен быть пустым"
-			},
-			isCapitalSymbol: {
-				message: "Пароль должен содержать хотя бы одну заглавную букву"
-			},
-			isContainDigit: {
-				message: "Пароль должен содержать хотя бы одно число"
-			},
-			min: {
-				message: "Пароль должен состоять минимум из 8 символов",
-				value: 8
-			}
-		},
-		profession: {
-			isRequired: {
-				message: "Обязательно выберите Вашу профессию"
-			}
-		},
-		license: {
-			isRequired: {
-				message: "Вы не приняли лицензионное соглашение"
+				message: "Введите ваше имя"
 			}
 		}
 	};
@@ -133,13 +120,13 @@ const UserEditPage = () => {
 	};
 
 	const validate = () => {
-		const errors = validator(user, validatorConfig);
+		const errors = validator(data, validatorConfig);
 		setErrors(errors);
 		return Object.keys(errors).length === 0;
 	};
 
 	const handleChange = (target) => {
-		setUser((prevState) => ({
+		setData((prevState) => ({
 			...prevState,
 			[target.name]: target.value
 		}));
@@ -147,6 +134,7 @@ const UserEditPage = () => {
 
 	return (
 		<div className="container mt-5">
+			<BackHistoryButton />
 			<div className="row">
 				<div className="col-md-6 offset-md-3 shadow p-4">
 					{!isLoading && Object.keys(professions).length > 0
@@ -160,7 +148,7 @@ const UserEditPage = () => {
 									error={errors.name}
 								/>
 								<TextField
-									label="Email"
+									label="Электронная почта"
 									name="email"
 									value={data.email}
 									onChange={handleChange}
@@ -176,7 +164,8 @@ const UserEditPage = () => {
 									name="profession"
 								/>
 								<RadioField
-									options={[{ name: "Male", value: "male" },
+									options={[
+										{ name: "Male", value: "male" },
 										{ name: "Female", value: "female" },
 										{ name: "Other", value: "other" }
 									]}

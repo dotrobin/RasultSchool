@@ -23,6 +23,7 @@ module.exports = {
     "no-tabs": ["error", { allowIndentationTabs: true }],
     "multiline-ternary": ["off"],
     quotes: ["error", "double", { allowTemplateLiterals: true }],
+    "object-shorthand": ["error", "methods"]
   },
 
 };

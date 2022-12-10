@@ -9,6 +9,7 @@ const SelectField = ({ label, value, onChange, defaultValue, options, error, nam
 	const getInputClasses = () => {
 		return "form-select" + (error ? " is-invalid" : "");
 	};
+
 	const handleChange = ({ target }) => {
 		onChange({ name: target.name, value: target.value });
 	};

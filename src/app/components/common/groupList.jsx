@@ -3,6 +3,26 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 
 const GroupList = ({ items, valueProperty, contentProperty, selectedItem, onItemSelect }) => {
+	if (!Array.isArray(items)) {
+		return (
+			<ul className="list-group">
+				{Object.keys(items).map((item) => (
+					<li
+						key={items[item][valueProperty]}
+						className={
+							"list-group-item" +
+							(items[item] === selectedItem ? " active" : "")
+						}
+						onClick={() => onItemSelect(items[item])}
+						role="button"
+					>
+						{items[item][contentProperty]}
+					</li>
+				))}
+			</ul>
+		);
+	};
+
 	return (
 		<ul className="list-group">
 			{items instanceof Object
