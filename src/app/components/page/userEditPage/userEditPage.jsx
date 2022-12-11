@@ -78,9 +78,9 @@ const UserEditPage = () => {
 						name: qualities[quality].label,
 						color: qualities[quality].color
 					});
-				}
-			}
-		}
+				};
+			};
+		};
 		return qualitiesArray;
 	};
 
@@ -155,13 +155,13 @@ const UserEditPage = () => {
 									error={errors.email}
 								/>
 								<SelectField
-									label="Выберите свою профессию"
+									label="Выбери свою профессию"
 									defaultOption="Choose..."
 									options={professions}
+									name="profession"
 									onChange={handleChange}
 									value={data.profession}
 									error={errors.profession}
-									name="profession"
 								/>
 								<RadioField
 									options={[

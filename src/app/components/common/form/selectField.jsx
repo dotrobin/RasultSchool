@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SelectField = ({ label, value, onChange, defaultValue, options, error, name }) => {
+const SelectField = ({ label, value, onChange, defaultOption, options, error, name }) => {
 	const optionsArray = !Array.isArray(options) && typeof (options) === "object"
-		? Object.keys(options).map((optionName) => ({ name: options[optionName].name, value: options[optionName]._id }))
+		? Object.values(options)
 		: options;
 
 	const getInputClasses = () => {
@@ -20,7 +20,6 @@ const SelectField = ({ label, value, onChange, defaultValue, options, error, nam
 				{label}
 			</label>
 			<select
-				defaultValue={defaultValue}
 				className={getInputClasses()}
 				id={name}
 				name={name}
@@ -28,14 +27,14 @@ const SelectField = ({ label, value, onChange, defaultValue, options, error, nam
 				onChange={handleChange}
 			>
 				<option disabled value="">
-					{defaultValue}
+					{defaultOption}
 				</option>
 				{optionsArray && optionsArray.map(option => (
 					<option
 						value={option.value}
 						key={option.value}
 					>
-						{option.name}
+						{option.label}
 					</option>
 				))}
 			</select>
@@ -49,11 +48,11 @@ const SelectField = ({ label, value, onChange, defaultValue, options, error, nam
 };
 
 SelectField.propTypes = {
+	defaultOption: PropTypes.string,
 	label: PropTypes.string,
 	value: PropTypes.string,
 	name: PropTypes.string,
 	onChange: PropTypes.func,
-	defaultValue: PropTypes.string,
 	error: PropTypes.string,
 	options: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };

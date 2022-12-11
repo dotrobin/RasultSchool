@@ -10,7 +10,9 @@ const Comment = ({
 	onRemove
 }) => {
 	const [user, setUser] = useState();
+
 	const [isLoading, setIsLoading] = useState(false);
+
 	useEffect(() => {
 		setIsLoading(true);
 		API.users.getById(userId).then((data) => {
