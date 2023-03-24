@@ -29,7 +29,7 @@ export const ProfessionProvider = ({ children }) => {
   function errorCatcher(error) {
     const { message } = error.response.data;
     setError(message);
-  };
+  }
 
   async function getProfessionsList() {
     try {

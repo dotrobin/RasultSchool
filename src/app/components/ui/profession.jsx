@@ -1,6 +1,7 @@
 import React from "react";
-import { useProfessions } from "../../hooks/useProfession";
 import PropTypes from "prop-types";
+
+import { useProfessions } from "../../hooks/useProfession";
 
 const Profession = ({ id }) => {
   const { isLoading, getProfession } = useProfessions();
