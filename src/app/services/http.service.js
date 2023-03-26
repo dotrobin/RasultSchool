@@ -14,7 +14,8 @@ http.interceptors.request.use(
             config.url = (containSlash ? config.url.slice(0, -1) : config.url) + ".json";
         }
         return config;
-    }, function (error) {
+    },
+    function (error) {
         return Promise.reject(error);
     }
 );
