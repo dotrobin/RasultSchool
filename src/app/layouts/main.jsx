@@ -1,4 +1,5 @@
 import React from "react";
+
 import useMockData from "../utils/mockData";
 
 const Main = () => {
@@ -6,6 +7,7 @@ const Main = () => {
     const handleClick = () => {
         initialize();
     };
+
     return (
         <div className="container mt-5">
             <h1> Main Page</h1>
